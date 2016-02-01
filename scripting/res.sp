@@ -26,7 +26,6 @@ Handle g_ClientSettings;
 bool SoundsTRSucess = false;
 bool SoundsCTSucess = false;
 bool SamePath = false;
-bool CSGO;
 //Sounds Arrays
 ArrayList ctSound;
 ArrayList trSound;
@@ -67,9 +66,6 @@ public void OnPluginStart()
 	HookConVarChange(g_hCTPath, PathChange);
 	HookConVarChange(g_hPlayType, PathChange);
 	
-	char theFolder[40];
-	GetGameFolderName(theFolder, sizeof(theFolder));
-	CSGO = StrEqual(theFolder, ("csgo"));
 	HookEvent("round_start", Event_RoundStart, EventHookMode_PostNoCopy);
 	HookEvent("round_end", Event_RoundEnd);
 	
@@ -410,15 +406,10 @@ void PlayMusicAll(char[] szSound)
 	{
 		if(IsValidClient(i) && (GetConVarInt(g_ClientSettings) == 0 || GetIntCookie(i, g_AbNeRCookie) == 0)) //Adicionado versão v3.4
 		{
-			if(CSGO)
-			{ 
+			if (GetEngineVersion() == Engine_CSGO)
 				ClientCommand(i, "playgamesound Music.StopAllMusic");
-				ClientCommand(i, "play *%s", szSound);
-			}
-			else
-			{
-				ClientCommand(i, "play %s", szSound);
-			}
+			
+			EmitSoundToClientAny(i, szSound);
 		}
 	}
 	
