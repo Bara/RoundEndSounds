@@ -1,12 +1,13 @@
 #include <sourcemod>
 #include <sdktools>
-#include <colors>
+#include <multicolors>
+#include <emitsoundany>
 #include <clientprefs>
 #include <cstrike>
 
 #pragma newdecls required // 2015 rules 
 #pragma semicolon 1
-#define PLUGIN_VERSION "3.4"
+#define PLUGIN_VERSION "1.0.0"
 
 //MapSounds Stuff
 int g_iSoundEnts[2048];
@@ -20,7 +21,7 @@ Handle g_AbNeRCookie;
 Handle g_hStop;
 Handle g_PlayPrint;
 Handle g_roundDrawPlay;
-Handle g_ClientSettings; //Adicionado na versão v3.4 para definir se o jogador pode ou não escolher se quer ouvir os sons.
+Handle g_ClientSettings;
 
 bool SoundsTRSucess = false;
 bool SoundsCTSucess = false;
@@ -32,11 +33,11 @@ ArrayList trSound;
 
 public Plugin myinfo =
 {
-	name = "[CS:GO/CSS] AbNeR Round End Sounds Simple",
-	author = "AbNeR_CSS",
-	description = "Play cool musics when round ends!",
+	name = "Round End Sounds",
+	author = "AbNeR_CSS & Bara",
+	description = "",
 	version = PLUGIN_VERSION,
-	url = "http://www.tecnohardclan.com/forum/"
+	url = ""
 }
 
 public void OnPluginStart()
